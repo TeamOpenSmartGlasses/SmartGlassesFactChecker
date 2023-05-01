@@ -113,10 +113,6 @@ public class FactCheckerService extends SmartGlassesAndroidService {
     public void focusChangedCallback(FocusStates focusState) {
         Log.d(TAG, "Focus callback called with state: " + focusState);
         this.focusState = focusState;
-
-        if (focusState.equals(FocusStates.IN_FOCUS)) {
-            sgmLib.sendReferenceCard(appName, "Listening...");
-        }
     }
 
     public void processTranscriptionCallback(String transcript, long timestamp, boolean isFinal) {
