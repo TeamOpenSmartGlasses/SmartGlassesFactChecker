@@ -30,12 +30,6 @@ public class FactCheckerBackend {
     private final int openAiServiceTimeoutDuration = 110;
     String previousStatement = "";
 
-//    public static void setApiToken(String token) {
-//        Log.d("SmartGlassesChatGpt_ChatGptBackend", "setApiToken: token set");
-//        apiToken = token;
-//        EventBus.getDefault().post(new OpenAIApiKeyProvidedEvent(token));
-//    }
-
     public FactCheckerBackend(){}
 
     public void initFactCheckerService(String token) {
@@ -102,59 +96,11 @@ public class FactCheckerBackend {
                     }
                     previousStatement = statement;
 
-                    /*
-                    // Add back to chat UI and internal history
-                    if (mode == FactCheckerAppMode.Conversation) {
-                        EventBus.getDefault().post(new ChatReceivedEvent(response.getContent()));
-                        messages.add(response);
-                    }
-
-                    // Send back one off question and answer
-                    if (mode == FactCheckerAppMode.Question) {
-                        EventBus.getDefault().post(new QuestionAnswerReceivedEvent(message, response.getContent()));
-
-                        // Edit the last user message to specify that it was a question
-                        int lastIndex = messages.size() - 1;
-                        ChatMessage lastUserMessage = messages.get(lastIndex);
-                        lastUserMessage.setContent("User asked a question: " + lastUserMessage.getContent());
-                        messages.set(lastIndex, lastUserMessage);
-
-                        // Specify on the answer side as well
-                        response.setContent("Got an answer: " + response.getContent());
-                        messages.add(response);
-                    }
-                    */
                 } catch (Exception e){
                     Log.d(TAG, "run: encountered error: " + e.getMessage());
                     //EventBus.getDefault().post(new ChatErrorEvent(e.getMessage()));
                 }
-
-//                Log.d(TAG, "Streaming chat completion");
-//                service.streamChatCompletion(chatCompletionRequest)
-//                        .doOnError(this::onStreamChatGptError)
-//                        .doOnComplete(this::onStreamComplete)
-//                        .blockingForEach(this::onItemReceivedFromStream);
             }
-
-//            private void onStreamChatGptError(Throwable throwable) {
-//                Log.d(TAG, throwable.getMessage());
-//                EventBus.getDefault().post(new ChatReceivedEvent(throwable.getMessage()));
-//                throwable.printStackTrace();
-//            }
-//
-//            public void onItemReceivedFromStream(ChatCompletionChunk chunk) {
-//                String textChunk = chunk.getChoices().get(0).getMessage().getContent();
-//                Log.d(TAG, "Chunk received from stream: " + textChunk);
-//                EventBus.getDefault().post(new ChatReceivedEvent(textChunk));
-//                responseMessageBuffer.append(textChunk);
-//                responseMessageBuffer.append(" ");
-//            }
-//
-//            public void onStreamComplete() {
-//                String responseMessage = responseMessageBuffer.toString();
-//                messages.add(new ChatMessage(ChatMessageRole.ASSISTANT.value(), responseMessage));
-//                responseMessageBuffer = new StringBuffer();
-//            }
         }
         new Thread(new DoGptStuff()).start();
     }

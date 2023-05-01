@@ -31,11 +31,6 @@ public class FactCheckerService extends SmartGlassesAndroidService {
     public FocusStates focusState;
     public FactCheckerBackend factCheckerBackend;
     public boolean includeUndecided = false;
-
-    public StringBuffer messageBuffer = new StringBuffer();
-    private boolean userTurnLabelSet = false;
-    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-    private Future<?> future;
     private boolean openAiKeyProvided = false;
     private FactCheckerAppMode mode = FactCheckerAppMode.Inactive;
 
@@ -133,57 +128,7 @@ public class FactCheckerService extends SmartGlassesAndroidService {
         if (isFinal) {
             trySendChat(transcript);
         }
-
-        // We want to send our message in our message buffer when we stop speaking for like 9 seconds
-        // If the transcript is finalized, then we add it to our buffer, and reset our timer
-
-
-        // We want to send our message in our message buffer when we stop speaking for like 9 seconds
-        // If the transcript is finalized, then we add it to our buffer, and reset our timer
-       /*
-        if (isFinal && openAiKeyProvided){
-            Log.d(TAG, "processTranscriptionCallback: " + transcript);
-            messageBuffer.append(transcript);
-            messageBuffer.append(" ");
-
-            if (!userTurnLabelSet) {
-                transcript = "User: " + transcript;
-                userTurnLabelSet = true;
-            }
-            sgmLib.pushScrollingText(transcript);
-
-            // Cancel the scheduled job if we get a new transcript
-            if (future != null) {
-                future.cancel(false);
-                Log.d(TAG, "processTranscriptionCallback: Cancelled scheduled job");
-            }
-
-            future = executorService.schedule(() -> {
-                String message = messageBuffer.toString();
-                
-                if (!message.isEmpty()) {
-                    factCheckerBackend.sendChat(messageBuffer.toString(), mode);
-                    messageBuffer = new StringBuffer();
-                    Log.d(TAG, "processTranscriptionCallback: Ran scheduled job and sent message");
-                } else {
-                    Log.d(TAG, "processTranscriptionCallback: Message is empty");
-                }
-            }, 10, TimeUnit.SECONDS);
-        }
-
-        */
     }
-    /*
-
-    private void resetUserMessage() {
-        // Cancel the scheduled job if we get a new transcript
-        if (future != null) {
-            future.cancel(false);
-            Log.d(TAG, "resetUserMessage: Cancelled scheduled job");
-        }
-        messageBuffer = new StringBuffer();
-    }
-     */
 
     /* Subscriptions */
 
