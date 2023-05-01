@@ -14,6 +14,9 @@ This is an example app that listens to your conversations and attempts to fact c
 * Launch this app via the [SmartGlassesManager](https://github.com/TeamOpenSmartGlasses/SmartGlassesManager)
   - Do this by saying: ("Hey computer, fact checker")
 
+## TODO
+
+* Add checkbox to enable/disable statements that ChatGPT is unsure of (currently default: disabled)
 
 ## Contributing
 
