@@ -174,6 +174,10 @@ public class FactCheckerService extends SmartGlassesAndroidService {
 
     public String prettifyFactTitle(String fact) {
         String ret = fact.substring(0, 1).toUpperCase() + fact.substring(1); //capitalize first
+        if(ret.length() > 28){
+            ret = ret.substring(0, 27) + "...";
+        }
+
         ret = String.format("\"%s\"", ret); //add quotes
         return ret;
     }
