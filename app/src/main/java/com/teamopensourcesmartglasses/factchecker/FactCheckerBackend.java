@@ -39,12 +39,20 @@ public class FactCheckerBackend {
         messages.add(systemMessage);
     }
 
+    public void maybeTrimMessages(){
+        if(messages.size() > 3){
+            messages.remove(1); //remove earliest user/transcript message
+        }
+    }
+
     public void sendChat(String message){
         // Don't run if openAI service is not initialized yet
         if (service == null) {
             EventBus.getDefault().post(new ChatErrorEvent("OpenAi Key has not been provided yet. Please do so in the app."));
             return;
         }
+
+        maybeTrimMessages();
 
         class DoGptStuff implements Runnable {
             public void run(){
