@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.IBinder;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
@@ -19,6 +20,7 @@ import com.teamopensourcesmartglasses.factchecker.events.OpenAIApiKeyProvidedEve
 
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+        setupHyperlink();
 
         startFactCheckerService();
 
@@ -65,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
             // Toast to inform user that key has been saved
             Toast.makeText(this, "OpenAi key saved for future sessions", Toast.LENGTH_LONG).show();
         });
+    }
+
+    private void setupHyperlink() {
+        TextView linkTextView = findViewById(R.id.textview_first);
+        linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     /* SGMLib */
