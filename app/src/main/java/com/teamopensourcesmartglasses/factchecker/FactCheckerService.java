@@ -90,6 +90,12 @@ public class FactCheckerService extends SmartGlassesAndroidService {
                 Log.d(TAG, "Including undecided facts");
                 includeUndecided = true;
             }
+            else {
+                Log.d(TAG, "DO NOT INCLUDE UNDECIDED 1");
+            }
+        }
+        else {
+            Log.d(TAG, "DO NOT INCLUDE UNDECIDED 2");
         }
 
     }
@@ -136,7 +142,7 @@ public class FactCheckerService extends SmartGlassesAndroidService {
         String validity = event.getValidity();
         String explanation = event.getExplanation();
 
-        if(!includeUndecided && validity.toLowerCase() == "undecided")
+        if(includeUndecided == false && validity.toLowerCase().equals("undecided"))
             return;
 
         String title = prettifyFactTitle(fact);
