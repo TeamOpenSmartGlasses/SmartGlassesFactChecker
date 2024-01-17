@@ -2,6 +2,8 @@
 
 This is an app that listens to your conversations via the microphone and fact checks spoken statements in real-time using ChatGPT.
 
+Demo video:
+
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/QdCHqAbLw-g/0.jpg)](https://www.youtube.com/watch?v=QdCHqAbLw-g)
 
 ## Installation
